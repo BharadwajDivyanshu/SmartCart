@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//x 1. User and Authentication Tables
+model User {
+  id              String    @id @default(uuid())
+  email           String    @unique
+  name            String
+  passwordHash    String
+  instacartUserId Int?      @unique // Nullable for new users not in the training set
+  createdAt       DateTime  @default(now())
+  cart            Cart?
+}
+
+model UserEmbedding {
+  instacartUserId Int     @id
+  embeddingVector Json // Storing vector as a JSON array
+}
+
+
+// 2. Product Catalog Tables
+model Product {
+  productId         Int      @id
+  productName       String
+  category          String?
+  price             Float?
+  imageUrl          String?
+  nutriments        Json?
+  healthFactorScore Float?
+  embeddingP        Json?    // 'p' (item-input) embedding
+  embeddingQ        Json?    // 'q' (item-context) embedding
+  CartItem          CartItem[]
+}
+
+
+// 3. Application State Tables
+model Cart {
+  id          String     @id @default(uuid())
+  user        User       @relation(fields: [userId], references: [id])
+  userId      String     @unique
+  lastUpdated DateTime   @updatedAt
+  items       CartItem[]
+}
+
+model CartItem {
+  id        String  @id @default(uuid())
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  cartId    String
+  product   Product @relation(fields: [productId], references: [productId])
+  productId Int
+  quantity  Int
+
+  @@unique([cartId, productId]) // A product can only appear once per cart
+}

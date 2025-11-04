@@ -1,0 +1,115 @@
+==========================================================
+
+Node.js (for /frontend and /smartcart-backend)
+
+==========================================================
+
+Dependencies
+
+**/node_modules/
+
+Compiled build output (for React/Vite)
+
+**/dist/
+**/build/
+
+Logs
+
+*/npm-debug.log
+*/yarn-error.log
+*/yarn-debug.log
+
+Vite cache
+
+**/.vite/
+
+==========================================================
+
+Python (for /smartcart-ml-service)
+
+==========================================================
+
+Virtual environments
+
+**/venv/
+**/*.venv/
+**/env/
+
+Python cache
+
+**/pycache/
+**/.pyc
+**/.pyo
+**/*.pyd
+
+==========================================================
+
+Project-Specific Artifacts (Data, Models, Logs)
+
+==========================================================
+
+Ignore all raw data (Kaggle, OpenFoodFacts)
+
+smartcart-ml-service/offline-ml-pipeline/data/kaggle/
+smartcart-ml-service/offline-ml-pipeline/data/openfoodfacts/
+
+Ignore all generated data, mappings, and model artifacts
+
+from the offline pipeline
+
+ML-service/offline-ml-pipeline/data/
+ML-service/offline-ml-pipeline/data/.parquet
+ML-service/offline-ml-pipeline/data/.idx
+ML-service/offline-ml-pipeline/data/.json
+ML-service/offline-ml-pipeline/.pth
+
+Ignore the copied artifacts in the ML service's model folder
+
+smartcart-ml-service/ml_models/
+
+Ignore logs
+
+**/logs/
+**/*.log
+
+==========================================================
+
+Secrets (CRITICAL)
+
+==========================================================
+
+Ignore all .env files in any directory
+
+**/.env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+But do track example .env files
+
+!**/.env.example
+
+==========================================================
+
+OS & IDE Files
+
+==========================================================
+
+macOS
+
+.DS_Store
+.AppleDouble
+
+Windows
+
+Thumbs.db
+ehthumbs.db
+
+VS Code
+
+.vscode/
+
+PyCharm
+
+.idea/

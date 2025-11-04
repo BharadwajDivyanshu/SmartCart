@@ -1,0 +1,7 @@
+flask
+gunicorn
+torch
+faiss-cpu
+numpy
+pandas
+pyarrow
